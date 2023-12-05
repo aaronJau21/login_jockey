@@ -6,7 +6,7 @@ const CreateUsuarios = ({ showModal, setShowModal }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-            <div className="bg-white w-full mx-[30%] p-5">
+            <div className="bg-white w-full mx-[5%] md:mx-[30%] p-5">
                 <h2 className="text-center">Crear Usuarios</h2>
                 <form className=" border border-black shadow-lg rounded-md py-5 mt-7">
                     <div className="flex justify-around ">

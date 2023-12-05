@@ -31,7 +31,7 @@ const Users = () => {
     }, []);
 
     return (
-        <div className="w-screen relative">
+        <div className="w-screen relative mt-12">
             <div className="mx-9 mt-9">
                 <div className="flex justify-end">
                     <button className="bg-blue-500 px-3 py-1 rounded-md text-white shadow-md" onClick={() => handleModal()}>Agregar Usuario</button>

@@ -11,7 +11,7 @@ const Sidebar = () => {
     };
 
 
-
+    console.log(sidebarOpen);
     return (
         <div className="relative">
             <button
@@ -22,11 +22,11 @@ const Sidebar = () => {
             >
                 ☰
             </button>
-            <div className={`sidebar bg-gray-400 ${sidebarOpen ? 'flex-initial' : 'hidden'} md:w-44 min-h-screen`}>
+            <div className={`sidebar bg-gray-400 ${sidebarOpen ? 'flex-initial' : 'hidden'} w-40 md:w-44 min-h-screen`}>
                 <hr className="h-0 border-1 border-slate-400" />
                 <div className="list-none m-left-5">
                     <ul className="ml-2.5 mt-2.5">
-                        <p className="flex mt-3.5 font-bold">Principal</p>
+                        <p className="flex ml-6 mt-3.5 font-bold">Principal</p>
 
                         <Link to={"/users"} >
                             <li className={`flex items-center mt-1.5 cursor-pointer hover:bg-gray-500 ${location === "/users" ? "bg-gray-500" : ""}`}>
