@@ -81,15 +81,6 @@ const CreateUsuarios = ({ showModal, setShowModal, setUsers, users }) => {
                         />
                         </div>
                     </div>
-                    <div className="flex justify-center mt-9 ">
-                        <TextField
-                            sx={{ width: '60%' }}
-                            id="password"
-                            label="Password del usuario"
-                            variant="outlined"
-                            disabled
-                        />
-                    </div>
                     <div className="flex justify-center gap-x-4 mt-9">
                         <button type="submit" className="bg-blue-500 px-3 py-1 rounded-md text-white shadow-md">
                             Agregar

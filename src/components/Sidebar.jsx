@@ -10,6 +10,12 @@ const Sidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/";
+      };
+
 
     
     return (
@@ -34,18 +40,25 @@ const Sidebar = () => {
                                 <span className="ml-6">Usuarios</span>
                             </li>
                         </Link>
+                        <Link to={"http://localhost:5174/"} >
+                            <li className={`flex items-center mt-1.5 cursor-pointer hover:bg-gray-500 ${location === "/" ? "bg-gray-500" : ""}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" color="#8b0000" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                            </svg>
+                                <span className="ml-5   ">Mapa</span>
+                            </li>
+                        </Link>
                         <Link to={"/"} >
                             <li className={`flex items-center mt-1.5 cursor-pointer hover:bg-gray-500 ${location === "/" ? "bg-gray-500" : ""}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" color="#8b0000" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" /></svg>
-                                <span className="ml-6">Inicio</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" color="#8b0000" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                                <span className="ml-5">Inicio</span>
                             </li>
                         </Link>
                         <Link
                             to="/"
-                            // onClick={() => {
-                            //     logout()
-                            //     handleLogOut()
-                            // }}
+                            onClick={() =>handleLogout()}
                             role="menuitem"
                             tabIndex="-1"
                             id="user-menu-item-1"

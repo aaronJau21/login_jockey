@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, Typography, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import { http } from "../../services/api";
 import { getLocal } from "../../utils/localStorage";
@@ -72,27 +72,35 @@ const Users = () => {
                 }
                 <div className="mt-9">
                     <TableContainer component={Paper}>
-                        <Table sx={{ backgroundColor: "gray" }} aria-label="simple table">
+                        <Table sx={{ backgroundColor: "#a2a3ac" }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="center">Nombre</TableCell>
-                                    <TableCell align="center">Apellido</TableCell>
-                                    <TableCell align="center">Email</TableCell>
-                                    <TableCell align="center">Teléfono</TableCell>
-                                    <TableCell align="center">Contraseña</TableCell>
-                                    <TableCell align="center">Actions</TableCell>
+                                    <TableCell align="center">
+                                    <Typography variant="h6" style={{ color: "white", fontWeight: "normal" }}>Nombre</Typography>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                    <Typography variant="h6" style={{ color: "white", fontWeight: "normal" }}>Apellido</Typography>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                    <Typography variant="h6" style={{ color: "white", fontWeight: "normal" }}>Email</Typography>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                    <Typography variant="h6" style={{ color: "white", fontWeight: "normal" }}>Telefono</Typography>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                    <Typography variant="h6" style={{ color: "white", fontWeight: "normal" }}>Actions</Typography>
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody sx={{ backgroundColor: "#e8eaf6" }}>
                                 {users.map((user) => (
                                     <TableRow key={user?.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                        <TableCell component="th" scope="row">
+                                        <TableCell align="center" component="th" scope="row">
                                             {user?.nombres}
                                         </TableCell>
                                         <TableCell align="center">{user?.apellidos}</TableCell>
                                         <TableCell align="center">{user?.email}</TableCell>
                                         <TableCell align="center">{user?.telefono}</TableCell>
-                                        <TableCell align="center">Genera Password</TableCell>
                                         <TableCell align="center">
                                             <div className="flex justify-center gap-x-4">
                                                 <button onClick={()=> deleteUser(user?.email)}>
