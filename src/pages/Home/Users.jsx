@@ -2,11 +2,13 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { useEffect, useState } from "react";
 import { http } from "../../services/api";
 import { getLocal } from "../../utils/localStorage";
+import CreateUsuarios from "./modal/CreateUsuarios";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
+    const [showModal, setShowModal] = useState(false)
     const token = getLocal();
-    console.log(token)
+
     const getUsers = async () => {
         try {
             const response = await http.get('/users/getUsers', {
@@ -14,23 +16,29 @@ const Users = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response.data.users);
             setUsers(response.data.users);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     };
 
+    const handleModal = () => {
+        setShowModal(!showModal)
+    }
+
     useEffect(() => {
         getUsers();
     }, []);
 
     return (
-        <div className="w-screen">
+        <div className="w-screen relative">
             <div className="mx-9 mt-9">
                 <div className="flex justify-end">
-                    <button className="bg-blue-500 px-3 py-1 rounded-md text-white shadow-md">Agregar Usuario</button>
+                    <button className="bg-blue-500 px-3 py-1 rounded-md text-white shadow-md" onClick={() => handleModal()}>Agregar Usuario</button>
                 </div>
+                {
+                    showModal && <CreateUsuarios showModal={showModal} setShowModal={setShowModal} />
+                }
                 <div className="mt-9">
                     <TableContainer component={Paper}>
                         <Table sx={{ backgroundColor: "gray" }} aria-label="simple table">
