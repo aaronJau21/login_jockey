@@ -21,7 +21,7 @@ const Users = () => {
             console.error('Error fetching users:', error);
         }
     };
-
+    console.log(token)
     const handleModal = () => {
         setShowModal(!showModal)
     }
