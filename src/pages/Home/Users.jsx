@@ -6,7 +6,7 @@ import { getLocal } from "../../utils/localStorage";
 const Users = () => {
     const [users, setUsers] = useState([]);
     const token = getLocal();
-
+    console.log(token)
     const getUsers = async () => {
         try {
             const response = await http.get('/users/getUsers', {
