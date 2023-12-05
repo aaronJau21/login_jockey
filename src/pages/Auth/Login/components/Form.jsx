@@ -3,37 +3,59 @@ import { http } from "../../../../services/api";
 import { setLocal } from "../../../../utils/localStorage";
 import useValidation from "../../../../utils/validation";
 import { HookLogin } from "../../../../utils/toastify";
-const Form = ({ navigate }) => {
-    const {handleNoLogin, handleLogin} = HookLogin();
+const Form = () => {
+    const {handleNoLogin, toastifyForgotPassword} = HookLogin();
     const { inputError, validateteInput } = useValidation();
     const [visiblePass, setVisiblePass] = useState(false);
     const emailRef = createRef()
     const passwordlRef = createRef()
+    const [forgotPassword, setForgotPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        validateteInput("email", emailRef.current?.value);
-        validateteInput("password", passwordlRef.current?.value);
+
+        if(forgotPassword){
+            validateteInput("email", emailRef.current?.value);
+        }else{
+            validateteInput("email", emailRef.current?.value);
+            validateteInput("password", passwordlRef.current?.value);
+        }
+
         if (inputError.email || inputError.password) {
             handleNoLogin()
             return;
         }
 
-
-        try {
-            const datos = {
-                email: emailRef.current?.value,
-                password: passwordlRef.current?.value
+        if(forgotPassword){
+            try {
+                const email = emailRef.current?.value;
+                console.log(email);
+                const { data } = await http.post('/users/nodemaier', {email});
+                console.log(data);
+                toastifyForgotPassword("Te enviamos la nueva contraseña a su correo")
+            } catch (error) {
+                console.log(error.message)
             }
-            const { data } = await http.post('/users/login', datos);
-            setLocal(data.token, data.user)
-            navigate('/users')
-            handleLogin()
-        } catch (error) {
-            handleNoLogin()
-            console.log(error.message)
+        }else{
+            try {
+                const datos = {
+                    email: emailRef.current?.value,
+                    password: passwordlRef.current?.value
+                }
+                const { data } = await http.post('/users/login', datos);
+                setLocal(data.token, data.user)
+                if (data.user.role === "user") {
+                    window.location.href = 'http://localhost:5174/';
+                } else {
+                    window.location.href = '/users';
+                }
+            } catch (error) {
+                handleNoLogin()
+                console.log(error.message)
+            }
         }
+
     }
 
     return (
@@ -45,6 +67,23 @@ const Form = ({ navigate }) => {
                     </h2>
 
                     <form onSubmit={handleSubmit} className="block">
+                    {forgotPassword ? (
+                    <div className="relative mb-8">
+                    <input
+                    className="text-white w-96 p-2 rounded-3xl bg-gray-500/50 hover:bg-transparent"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Correo Electrónico"
+                    ref={emailRef}
+                    required
+                    />
+                    {inputError.email && (
+                    <p className="text-red-700">{inputError.email}</p>
+                    )}
+                    </div>
+                    ) : (
+                    <>
                         <div className="relative mb-8">
                             <input
                                 className="text-white w-96 p-2 rounded-3xl bg-gray-500/50 hover:bg-transparent"
@@ -53,6 +92,7 @@ const Form = ({ navigate }) => {
                                 id="email"
                                 placeholder="Correo Electrónico"
                                 ref={emailRef}
+                                required
                             />
                             {inputError.email && (
                             <p className="text-red-700">{inputError.email}</p>
@@ -93,6 +133,8 @@ const Form = ({ navigate }) => {
                             <p className="text-red-700">{inputError.password}</p>
                             )}
                         </div>
+                            </>
+                            )}
                         <div className="relative mb-8">
                             <button
                                 type="submit"
@@ -115,10 +157,12 @@ const Form = ({ navigate }) => {
 
                             </div>
                             <div className="w-50 text-md-right">
-                                <a
-                                    className="text-xl text-white font-semibold hover:text-red-700"
-                                >
-                                </a>
+                            <a
+                            className="text-xl text-white font-semibold hover:text-red-700 cursor-pointer"
+                            onClick={() => setForgotPassword(!forgotPassword)}
+                            >
+                            {forgotPassword ? "Iniciar Sesion" : "Olvide Contraeña"}
+                            </a>
                             </div>
                         </div>
                     </form>

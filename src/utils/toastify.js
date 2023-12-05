@@ -29,5 +29,29 @@ export const HookLogin = () => {
         });
     };
 
-    return { handleLogin, handleNoLogin, handleNoAdmin };
+    const toastifyRestorePassword = (response) => {
+        toast.success(response, {
+            ...commonOptions,
+        });
+    }
+    const toastifyRestorePasswordError = (response) => {
+        toast.error(response, {
+            ...commonOptions,
+        });
+    }
+
+    const toastifyForgotPassword = (response) => {
+        toast.success(response, {
+            ...commonOptions,
+        });
+    }
+
+    const toastifyDeleteUser = (response) => {
+        toast.success(response, {
+            ...commonOptions,
+        });
+    }
+
+
+    return { handleLogin,toastifyDeleteUser, handleNoLogin, handleNoAdmin, toastifyRestorePassword, toastifyRestorePasswordError, toastifyForgotPassword };
 };
