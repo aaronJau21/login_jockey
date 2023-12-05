@@ -11,7 +11,7 @@ const Sidebar = () => {
     };
 
 
-    console.log(sidebarOpen);
+    
     return (
         <div className="relative">
             <button

@@ -1,8 +1,8 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter} from "react-router-dom"
 import Login from "./pages/Auth/Login/Login"
-
 import Users from "./pages/Home/Users"
 import DashboardTemplate from "./templates/DashboardTemplate"
+import PrivateRoute from "./utils/PrivateRoute"
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/users',
-        element: <Users />,
+        element: <PrivateRoute element={<Users />} roles={['user']} />,
         index: true
       }
     ]
