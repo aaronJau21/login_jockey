@@ -1,9 +1,9 @@
 import { createBrowserRouter} from "react-router-dom"
-import Login from "./pages/Auth/Login/Login"
-import Users from "./pages/Home/Users"
-import DashboardTemplate from "./templates/DashboardTemplate"
-import PrivateRoute from "./utils/PrivateRoute"
-import { getUserLocal } from "./utils/localStorage";
+import Login from "./pages/Auth/Login/Login.jsx"
+import Users from "./pages/Home/Users.jsx"
+import DashboardTemplate from "./templates/DashboardTemplate.jsx"
+import PrivateRoute from "./utils/PrivateRoute.jsx"
+import { getUserLocal } from "./utils/localStorage.js";
 const user = getUserLocal();
 const router = createBrowserRouter([
   {
